@@ -6,7 +6,7 @@
 # Systems that exhibit this behavior typically have grub2-mkrescue on the path instead of grub-mkrescue.
 GRUB_CMD=grub-mkrescue # For Ubuntu
 
-[[ $# -ne 1 ]] && { echo "Usage: ./k3os-remaster.sh [k3os-version].iso"; exit 1; }
+[[ $# -ne 1 ]] && { echo "Usage: ./remaster.sh [k3os-version].iso"; exit 1; }
 BASE_ISO=$1
 NEW_ISO="isos/new/remastered-$(basename ${BASE_ISO})"
 
@@ -39,8 +39,8 @@ ${GRUB_CMD} -o ${NEW_ISO} /mnt/new-iso/ -- -volid "K3OS" 2> build.log
 
 # Check remastered ISO
 FILESIZE=$(stat -c %s ${NEW_ISO} 2>/dev/null)
-if [[ $FILESIZE > 0 ]]; then
-	printf '%s (%d bytes) ... done!\n' ${NEW_ISO} $FILESIZE
+if [[ ${FILESIZE} -gt 0 ]]; then
+	printf '%s (%d bytes) ... done!\n' ${NEW_ISO} ${FILESIZE}
 else
 	printf 'Something went wrong while trying to make %s\n' ${NEW_ISO}
 fi

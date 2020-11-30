@@ -1,0 +1,18 @@
+#cloud-config
+
+hostname: maestro
+k3os:
+  password: supersecure
+  token: myclustersecret
+  dns_nameservers:
+  - 9.9.9.9
+  - 1.1.1.1
+  ntp_servers:
+  - 0.pool.ntp.org
+  - 1.pool.ntp.org
+  k3s_args:
+  - server
+  - "--cluster-init"
+  - "--disable=traefik"
+  - "--disable=servicelb"
+  - "--node-name=maestro"
