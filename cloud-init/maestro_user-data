@@ -1,12 +1,17 @@
 #cloud-config
 
 hostname: maestro
+ssh_authorized_keys:
+- github:anypot
+write_files:
+- path: etc/conf.d/qemu-guest-agent
+  content: |-
+    GA_PATH=/dev/vport2p1
+  owner: root
+  permissions: '0644'
 k3os:
   password: supersecure
   token: myclustersecret
-  dns_nameservers:
-  - 9.9.9.9
-  - 1.1.1.1
   ntp_servers:
   - 0.pool.ntp.org
   - 1.pool.ntp.org
