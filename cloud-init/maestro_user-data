@@ -3,6 +3,9 @@
 hostname: maestro
 ssh_authorized_keys:
 - github:anypot
+boot_cmd:
+- "ln -vs /usr/share/zoneinfo/Europe/Paris /etc/localtime"
+- "echo 'Europe/Paris' > /etc/timezone"
 write_files:
 - path: etc/conf.d/qemu-guest-agent
   content: |-
@@ -10,7 +13,7 @@ write_files:
   owner: root
   permissions: '0644'
 k3os:
-  password: supersecure
+  password: $6$I2vGGEIk0RTc2A0R$CtJDzwYWejMz/HgI3Aqnwm9pAUOo3K6BCB1w7t3.psBBDpZI/eFmfsU7wgwjN7Qq0GLW5paJVE1CB3Tuc8nfc.
   token: myclustersecret
   ntp_servers:
   - 0.pool.ntp.org
