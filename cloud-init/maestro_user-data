@@ -4,6 +4,8 @@ hostname: maestro
 ssh_authorized_keys:
 - github:anypot
 boot_cmd:
+- "rc-update add rpc.statd"
+- "rc-update add nfs"
 - "ln -vs /usr/share/zoneinfo/Europe/Paris /etc/localtime"
 - "echo 'Europe/Paris' > /etc/timezone"
 write_files:
@@ -21,6 +23,5 @@ k3os:
   k3s_args:
   - server
   - "--cluster-init"
-  - "--disable=traefik"
-  - "--disable=servicelb"
+  - "--disable=traefik,servicelb"
   - "--node-name=maestro"
